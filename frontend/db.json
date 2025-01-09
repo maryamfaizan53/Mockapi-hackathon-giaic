@@ -1,0 +1,84 @@
+{
+    "inventory": [
+        {
+            "product_id": "unique identifier (UUID or Number)",
+            "product_name": "string",
+            "description": "string",
+            "price": "number",
+            "tags": ["array of strings"],  
+            "sizes": ["array of strings"], 
+            "images": ["array of strings"], 
+            "stock_quantity": "number",
+            "category": "string",  
+            "supplier": {
+              "supplier_name": "string",
+              "contact_number": "string"
+            },
+            "created_at": "ISO 8601 timestamp",
+            "updated_at": "ISO 8601 timestamp"
+          }
+          
+    ],
+
+    
+
+
+    "shipments": [
+        {
+        "shipment_id": "unique identifier (UUID or Number)",
+        "order_id": "string (reference to Sales Schema)",
+        "tracking_number": "string",
+        "shipment_status": "string", 
+        "estimated_delivery_date": "ISO 8601 timestamp",
+        "carrier": {
+          "carrier_name": "string",
+          "contact_number": "string"
+        },
+        "origin_address": "string",
+        "destination_address": "string",
+        "shipped_date": "ISO 8601 timestamp",
+        "delivery_date": "ISO 8601 timestamp (nullable)"
+      }
+      ],
+
+
+    "tracking": [
+        {
+  "tracking_id": "string (unique identifier, required)", 
+  "shipment_id": "string (reference to Shipment Schema, required)", 
+  "location_history": [
+    {
+      "timestamp": "ISO 8601 timestamp (required)",
+      "location": "string (required)"
+    }
+  ],
+  "current_status": "string (required, enum: [In Transit, Out for Delivery, Delivered])",
+  "last_updated": "ISO 8601 timestamp (auto-updated)"
+}
+],
+    "sales": [
+        {
+            "order_id": "string (unique identifier, required)", 
+            "customer_id": "string (required)",
+            "order_date": "ISO 8601 timestamp (auto-generated, required)",
+            "total_price": "number (required, must be >= 0)",
+            "products": [
+              {
+                "product_id": "string (reference to Inventory Schema, required)",
+                "quantity": "number (required, must be > 0)",
+                "price": "number (required, must match Inventory Schema price)"
+              }
+            ],
+            "payment_status": "string (required, enum: [Paid, Pending])",
+            "shipment_status": "string (reference to Shipment Schema)",
+            "customer_details": {
+              "name": "string (required)",
+              "email": "string (valid email format, required)",
+              "phone": "string (valid phone format, required)",
+              "address": "string (required)"
+            }
+          }
+          
+    ]
+  }
+  
