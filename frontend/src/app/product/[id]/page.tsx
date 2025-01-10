@@ -1,10 +1,11 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Product } from '@/app/types';
 import { client } from '@/sanity/lib/client';
-
+import Image from 'next/image';
 export default function ProductPage() {
   const {  product_id } = useParams(); // Get the product ID from the dynamic route
   const [product, setProduct] = useState<Product | null>(null);
@@ -14,22 +15,18 @@ export default function ProductPage() {
     if (!product_id) return;
 
     const fetchProduct = async () => {
-      const query = `*[_type == "product" && product_id == "${product_id}"] {
-        _id,
-        product_id,
-        product_name,
-        description,
-        price,
-        discountPercentage,
-        tags,
-        sizes,
-        images,
-        stock_quantity,
-        category,
-        rating,
-        ratingCount,
-        supplier
-      }[0]`; // Fetch a single product by ID
+      const query = await client.fetch(
+        `*[_type == "product" && "featured" in tags]{
+            _id,
+          name,
+          price,
+          discountPercentage,
+          tags,
+          "imageUrl": image.asset->url
+        }`
+    );
+       
+      // Fetch a single product by ID
       try {
         const data = await client.fetch<Product>(query);
         setProduct(data);
@@ -64,7 +61,7 @@ export default function ProductPage() {
       <h1 className="text-3xl font-bold mb-4">{product.product_name}</h1>
       <div className="flex gap-4">
         {product.images?.map((image, index) => (
-          <img
+          <Image
             key={index}
             src={image.asset.url}
             alt={product.product_name}

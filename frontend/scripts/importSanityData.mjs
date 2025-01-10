@@ -34,7 +34,7 @@ async function uploadImageToSanity(imageUrl) {
 
 async function importData() {
   try {
-    console.log('Fetching products from API...').han
+    console.log('Fetching products from API...')
     const response = await axios.get('https://fakestoreapi.com/products')
     const products = response.data
     console.log(`Fetched ${products.length} products`)
@@ -72,4 +72,4 @@ async function importData() {
     console.error('Error importing data:', error)
   }
 }
-importData()s
+importData();
