@@ -1,7 +1,7 @@
 // import { Rule } from '@sanity/types';
 // import { SchemaType } from 'sanity';
 
-export default {
+ export default {
   name: 'product',
   title: 'Product',
   type: 'document',

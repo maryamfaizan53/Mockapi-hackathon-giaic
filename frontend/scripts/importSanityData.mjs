@@ -10,10 +10,10 @@ const __dirname = path.dirname(__filename)
 dotenv.config({ path: path.resolve(__dirname, '../.env.local') })
 // Create Sanity client
 const client = createClient({
-  projectId:"kod2jsrj",
+  projectId:"i03hhpgy",
   dataset: "production",
   useCdn: false,
-  token: "sk6VlwYifQXcgjPUXxG1QRGScX39jkMT03qf10wFYkopwzD1JDUIHqmsSiO5i30y4YcPcmdRjs4TeNPhzJtLLFmw5jHkCxpv0Uj59HzBzRsUHMI1wvAQ9faeyXbM7oo6R5U386KvOF0nexEeMGxS0opTQ2jj7xZ3xtoVf3ZGgngnCNkc97Xd",
+  token: "skNCKeArdurNSiVBHt3LevyLRAbCaPUhalU7YFbPAWxkaszecjCv5jcL6vLi7Uz1RH0nvGatZgLybkoKondo7vTMEMozwAT44aYZVQTyhxFY6NuQ0JN6sPu9tDHFlh97ZAG156CWYgpkIxUY3cHTvIQJXMlkmxOWKQLye2b6rkuSSLZXdOH9",
   apiVersion: '2021-08-31'
 })
 async function uploadImageToSanity(imageUrl) {
@@ -34,8 +34,8 @@ async function uploadImageToSanity(imageUrl) {
 
 async function importData() {
   try {
-    console.log('Fetching products from API...')//ok smjh agya th npm run import wala jb chlainge to kya ayega... hn npm run import-data...url pehle change krna phr command cahlana..ok.. ye kis repo mai dala hai apne code....yeh meri repo clone kri thinew repo bana doin kia...han
-    const response = await axios.get('https://677d3ee94496848554c9b585.mockapi.io/api/products')
+    console.log('Fetching products from API...').han
+    const response = await axios.get('https://fakestoreapi.com/products')
     const products = response.data
     console.log(`Fetched ${products.length} products`)
     for (const product of products) {
@@ -72,4 +72,4 @@ async function importData() {
     console.error('Error importing data:', error)
   }
 }
-importData()
+importData()s
